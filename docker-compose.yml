@@ -8,6 +8,8 @@ services:
     depends_on:
       - redis
     tty: true
+    volumes:
+      - ./app:/home/app
     ports:
        - '3000:3000'
     container_name: node_app
