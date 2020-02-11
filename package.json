@@ -1,0 +1,19 @@
+{
+  "name": "test_nodejs",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YosioSyoji/test_nodejs.git"
+  },
+  "author": "ys",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YosioSyoji/test_nodejs/issues"
+  },
+  "homepage": "https://github.com/YosioSyoji/test_nodejs#readme"
+}

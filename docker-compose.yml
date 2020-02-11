@@ -5,4 +5,17 @@ services:
     build:
       context: .
       dockerfile: ./app/Dockerfile
+    depends_on:
+      - redis
+    tty: true
     container_name: node_app
+
+  redis:
+    build:
+      context: .
+      dockerfile: ./redis/Dockerfile
+    restart: always
+    volumes:
+      - ./data/redis:/data
+    container_name: redis
+
