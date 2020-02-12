@@ -7,7 +7,17 @@ var redis = new Redis(6379,"redis");
 
 
 
-/*
+//=====================================async即時関数
+(async () => {
+	  //const redis = new Redis();
+	  const pong = await redis.ping();
+	  console.log(pong);  
+	  //redis.disconnect();
+})();
+//=====================================
+
+
+//=====================================test
 const normalFunction = () => {
 	    asyncFunction1(); // 実行を開始するが終了を待つことなく次に進む
 	    console.log('normalFunction(): end');
@@ -24,10 +34,27 @@ const promise = new Promise(resolve => {
 	    setTimeout(resolve, 1000); // 1 秒後に終了
 });
 normalFunction(); // 実行が終わってから次に進む
-*/
+//=====================================
+
+
+
+
+
+
+
+
+
+
+var msg = "";
+
+redis.set("foo","bar");
+redis.get("foo",function(err,result){
+	console.log(result);
+});
+
 
 // Or using a promise if the last argument isn't a function
-/*redis.get("foo")
+redis.get("foo")
 	.then(result => {
 	  console.log("res:"+result);
 	  msg = result;
@@ -35,20 +62,23 @@ normalFunction(); // 実行が終わってから次に進む
 	.catch(err => {
 	  console.error("err:"+err);
 	});
-	*/
 
-redis.set("foo","var2");
-const asyncRedisget= async(msg) => {
-	console.log("asyncRedisget called");
+async function asyncRedisget(msg) {
 	const ret = await redis.get(msg);
 	console.log("asyncRedisget:"+ret);
 };
 	//redis.del("foo");
 
-console.log("------------");
 asyncRedisget("foo").then( () =>{
 	console.log("asyncRedisget execd");
 });
+
+/*const redis = require('redis');
+const client = redis.createClient(6379,"redis");
+client.set("foo_rand000000000000000","OK");
+client.get("foo_rand000000000000000",function(err,reply){
+	console.log(reply.toString());
+});*/
 
 
 app.get('/',(req,res) => {
