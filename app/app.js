@@ -37,6 +37,32 @@ normalFunction(); // 実行が終わってから次に進む
 	});
 	*/
 
+
+//stored set
+console.log("------------1");
+redis.zadd("rank",100000000,'q001');
+redis.zadd("rank",100000001,'q002');
+redis.zadd("rank",100000002,'q003');
+console.log("------------2");
+const asyncRedisZrevrange= async(msg) => {
+	console.log("asyncRedisZrevrange called");
+	//const ret = await redis.zrevrangebyscore(msg,999999999,0);
+	//const ret = await redis.zrange(msg,0,999999999);
+	//
+	const ret=await redis.zrange(msg, 0, 100, 'WITHSCORES');
+
+
+	console.log("asyncRedisZrevrange:"+ret);
+};
+console.log("------------3");
+asyncRedisZrevrange("rank").then( () =>{
+	console.log("asyncRedisZrevrange execd");
+});
+
+
+
+//async test
+/*
 redis.set("foo","var2");
 const asyncRedisget= async(msg) => {
 	console.log("asyncRedisget called");
@@ -45,7 +71,6 @@ const asyncRedisget= async(msg) => {
 };
 	//redis.del("foo");
 
-console.log("------------");
 asyncRedisget("foo").then( () =>{
 	console.log("asyncRedisget execd");
 });
@@ -60,4 +85,5 @@ const PORT = 3000;
 app.listen(PORT,() => {
 	console.log('Server Listen port 3000');
 });
+*/
 
